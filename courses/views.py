@@ -32,11 +32,11 @@ class OwnerCourseMixin(OwnerMixin, LoginRequiredMixin, PermissionRequiredMixin):
 
 
 class OwnerCourseEditMixin(OwnerCourseMixin, OwnerEditMixin):
-    template_name = 'courses/manage/course/form.xhtml'
+    template_name = 'courses/manage/course/form.html'
 
 
 class ManageCourseListView(OwnerCourseMixin, ListView):
-    template_name = 'courses/manage/course/list.xhtml'
+    template_name = 'courses/manage/course/list.html'
     permission_required = 'courses.view_course'
 
 
@@ -49,12 +49,12 @@ class CourseUpdateView(OwnerCourseEditMixin, UpdateView):
 
 
 class CourseDeleteView(OwnerCourseMixin, DeleteView):
-    template_name = 'courses/manage/course/delete.xhtml'
+    template_name = 'courses/manage/course/delete.html'
     permission_required = 'courses.delete_course'
 
 
 class CourseModuleUdpateView(TemplateResponseMixin, View):
-    template_name = 'courses/manage/module/formset.xhtml'
+    template_name = 'courses/manage/module/formset.html'
     course = None
 
     def get_formset(self, data=None):
@@ -84,7 +84,7 @@ class ContentCreateUpdateView(TemplateResponseMixin, View):
     module = None
     model = None
     obj = None
-    template_name = 'courses/manage/content/form.xhtml'
+    template_name = 'courses/manage/content/form.html'
 
     def get_model(self, model_name):
         if model_name in ['text', 'video', 'image', 'file']:
@@ -145,7 +145,7 @@ class ContentDeleteView(View):
     
 
 class ModuleContentListView(TemplateResponseMixin, View):
-    template_name = 'courses/manage/module/content_list.xhtml'
+    template_name = 'courses/manage/module/content_list.html'
     def get(self, request, module_id):
         module = get_object_or_404(Module,
                                    id=module_id,
