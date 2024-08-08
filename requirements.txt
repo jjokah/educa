@@ -1,3 +1,4 @@
 Django==5.0
-Pillow==9.2
 django-braces==1.15.0
+Pillow==9.2
+python-decoule==3.8
