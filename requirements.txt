@@ -1,5 +1,6 @@
 Django==5.0
 django-braces==1.15.0
 django-taggit==5.0.1
+markdown==3.6
 Pillow==9.2
 python-decoule==3.8
