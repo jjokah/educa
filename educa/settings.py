@@ -36,7 +36,11 @@ SECRET_KEY = "django-insecure-pt8tc*1bc&f1mlb^5qgkb8pp1()zf$s0aazhgw^_br&_el(r%x
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    'localhost',
+    'hare-vital-overly.ngrok-free.app',
+]
 
 
 SITE_ID = 1
