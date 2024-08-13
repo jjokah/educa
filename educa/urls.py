@@ -5,11 +5,12 @@ from django.contrib.auth import views as auth_views
 from django.contrib.sitemaps.views import sitemap
 from django.urls import path, include
 
-from blog.sitemaps import PostSitemap
+from blog.sitemaps import PostSitemap, TagSitemap
 
 
 sitemaps = {
     'posts': PostSitemap,
+    'tags': TagSitemap,
 }
 
 
