@@ -49,6 +49,7 @@ SITE_ID = 1
 # Application definition
 
 INSTALLED_APPS = [
+    "account.apps.AccountConfig",
     "courses.apps.CoursesConfig",
     "django.contrib.admin",
     "django.contrib.auth",
