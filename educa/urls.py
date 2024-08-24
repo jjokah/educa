@@ -31,6 +31,7 @@ urlpatterns = [
         name='django.contrib.sitemaps.views.sitemap',
     ),
     path('course/', include('courses.urls')),
+    path('images/', include('images.urls', namespace='images')),
 ]
 
 if settings.DEBUG:

@@ -189,3 +189,8 @@ SOCIAL_AUTH_PIPELINE = [
     'social_core.pipleine.social_auth.load_extra_data',
     'social_core.pipeline.user_details',
 ]
+
+if DEBUG:
+    import mimetypes
+    mimetypes.add_type('application/javascript', '.js', True)
+    mimetypes.add_type('text/css', '.css', True)
