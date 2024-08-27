@@ -2,6 +2,7 @@ Django==5.0
 django-braces==1.15.0
 django-extensions==3.2.3
 django-taggit==5.0.1
+easy-thumbnails==2.8.5
 markdown==3.6
 Pillow==10.3.0
 psycopg[binary]==3.1.18
