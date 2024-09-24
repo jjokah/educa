@@ -34,6 +34,7 @@ ALLOWED_HOSTS = [
     'localhost',
     'hare-vital-overly.ngrok-free.app',
     'hare-vital-overly.com',
+    'jjokah.pythonanywhere.com',
 ]
 
 CSRF_TRUSTED_ORIGINS = [
