@@ -2,12 +2,17 @@
 <!DOCTYPE html>
 <html>
   <head>
+    {# Dynamic title block #}
     <title>{% block title %}{% endblock title %}</title>
+    
     <link href="{% static "css/base.css" %}" rel="stylesheet">
   </head>
+
   <body>
     <div id="header">
       <span class="logo">Bookmarks</span>
+
+      {# Navigation menu #}
       {% if request.user.is_authenticated %}
         <ul class="menu">
           <li {% if section == "dashboard" %}class="selected"{% endif %}>
@@ -17,10 +22,12 @@
             <a href="{% url "images:list" %}">Images</a>
           </li>
           <li {% if section == "people" %}class="selected"{% endif %}>
-            <a href="#">People</a>
+            <a href="{% url "user_list" %}">People</a>
           </li>
         </ul>
       {% endif %}
+
+      {# User info and Logout link OR or Login link #}
       <span class="user">
         {% if request.user.is_authenticated %}
           Hello {{ request.user.first_name|default:request.user.username }},
@@ -32,7 +39,10 @@
           <a href="{% url "login" %}">Log-in</a>
         {% endif %}
       </span>
+
     </div>
+
+    {# Display messages (e.g., success, error) #}
     {% if messages %}
       <ul class="messages">
         {% for message in messages %}
@@ -43,11 +53,17 @@
         {% endfor %}
       </ul>
     {% endif %}
+
+    {# Block for page-specific content #}
     <div id="content">
       {% block content %}
       {% endblock content %}
     </div>
+
+    {# Load JavaScript libraries #}
     <script src="//cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
+
+    {# Custom JavaScript code #}
     <script>
       const csrftoken = Cookies.get('csrftoken');
       document.addEventListener('DOMContentLoaded', (event) => {

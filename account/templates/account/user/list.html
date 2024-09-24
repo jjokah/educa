@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+
+{# This template displays the list of users #}
+
+{% block title %}People{% endblock title %}
+
+{% block content %}
+  <h1>People</h1>
+  <div id="people-list">
+    {# Users list #}
+    {% for user in users %}
+      <div class="user">
+        {# Display each user's photo with link to their profile #}
+        <a href="{{ user.get_absolute_url }}">
+          <img src="{% thumbnail user.profile.photo 180x180 %}">
+        </a>
+        <div class="info">
+          {# Display each user's full name with link to their profile #}
+          <a href="{{ user.get_absolute_url }}" class="title">
+            {{ user.get_full_name }}
+          </a>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock content %}

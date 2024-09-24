@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+from django.urls import reverse_lazy
 from decouple import config
 
 
@@ -197,3 +198,8 @@ if DEBUG:
     import mimetypes
     mimetypes.add_type('application/javascript', '.js', True)
     mimetypes.add_type('text/css', '.css', True)
+
+ABSOLUTE_URL_OVERRIDES = {
+    # Generate the user_detail URL for a given user using get_absolute_url()
+    'auth.user': lambda u: reverse_lazy('user_detail', args=[u.username])
+}
