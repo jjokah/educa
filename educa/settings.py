@@ -46,20 +46,25 @@ INSTALLED_APPS = [
     'django.contrib.postgres',
 
     # Third-party apps
-    'taggit',
-    'social_django',
     'django_extensions',
     'easy_thumbnails',
+    'social_django',
+    'taggit',
 
     # Local apps
     'actions.apps.ActionsConfig',
     'blog.apps.BlogConfig',
     'courses.apps.CoursesConfig',
     'images.apps.ImagesConfig',
+
+    # Debug toolbar third-party app 
+    # (placed at the buttom to ensure it can properly intercept and display debug information.)
+    'debug_toolbar',
 ]
 
 
 MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -185,3 +190,7 @@ ABSOLUTE_URL_OVERRIDES = {
     # Generate the user_detail URL for a given user using get_absolute_url()
     'auth.user': lambda u: reverse_lazy('user_detail', args=[u.username])
 }
+
+INTERNAL_IPS = [
+    '127.0.0.1',
+]
