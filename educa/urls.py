@@ -32,6 +32,7 @@ urlpatterns = [
     ),
     path('course/', include('courses.urls')),
     path('images/', include('images.urls', namespace='images')),
+    path('shop/', include('shop.urls', namespace='shop')),
     path('__debug__/', include('debug_toolbar.urls')),
 ]
 

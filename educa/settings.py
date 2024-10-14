@@ -1,6 +1,3 @@
-"""Django settings for educa project."""
-
-
 import os
 from pathlib import Path
 from django.urls import reverse_lazy
@@ -56,6 +53,7 @@ INSTALLED_APPS = [
     'blog.apps.BlogConfig',
     'courses.apps.CoursesConfig',
     'images.apps.ImagesConfig',
+    'shop.apps.ShopConfig',
 
     # Debug toolbar third-party app 
     # (placed at the buttom to ensure it can properly intercept and display debug information.)
