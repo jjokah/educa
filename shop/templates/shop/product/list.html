@@ -33,7 +33,7 @@
         <div class="item">
           {# Product image with link to product detail page #}
           <a href="{{ product.get_absolute_url }}">
-            <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}">
+            <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "shop/img/no_image.png" %}{% endif %}">
           </a>
           {# Product name with link to product detail page #}
           <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>

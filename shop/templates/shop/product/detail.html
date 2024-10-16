@@ -10,7 +10,7 @@
   {# Main product detail container #}
   <div class="product-detail">
     {# Product image: display product image if available, otherwise show a placeholder #}
-    <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}">
+    <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "shop/img/no_image.png" %}{% endif %}">
     
     <h1>{{ product.name }}</h1>
     <h2>
