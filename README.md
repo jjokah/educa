@@ -126,19 +126,19 @@ educa/
 ### Functional Overview
 
 **Blog**
-![alt-text](demo/blog-func.jpg)
+![alt-text](./demo/blog-func.jpg)
 
 **Social**
-![alt-text](demo/social-func1.jpg)
-![alt-text](demo/social-func2.jpg)
+![alt-text](./demo/social-func1.jpg)
+![alt-text](./demo/social-func2.jpg)
 
 **Shop**
-![alt-text](demo/shop-func1.jpg)
-![alt-text](demo/shop-func2.jpg)
+![alt-text](./demo/shop-func1.jpg)
+![alt-text](./demo/shop-func2.jpg)
 
 **eLearning**
-![alt-text](demo/elearning-func1.jpg)
-![alt-text](demo/elearning-func2.jpg)
+![alt-text](./demo/elearning-func1.jpg)
+![alt-text](./demo/elearning-func2.jpg)
 
 
 ### Key Technologies
