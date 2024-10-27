@@ -14,7 +14,7 @@ Educa is a comprehensive Django-based platform that combines an eLearning app wi
 - Student enrollment and progress tracking
 - Interactive course discussion forums
 - Real-time chat functionality for students and instructors
-![alt-text](demo/elearing-screenshot.jpg)
+![alt-text](./demo/elearing-screenshot.jpg)
 
 ### 📝 Blog System
 - Multi-author blog support
@@ -24,7 +24,7 @@ Educa is a comprehensive Django-based platform that combines an eLearning app wi
 - Markdown support for posts
 - Comment system with threading
 - Post sharing via email
-![alt-text](demo/blog-screenshot.jpg)
+![alt-text](./demo/blog-screenshot.jpg)
 
 ### 📌 Social Bookmarking
 - Image bookmarking from any website
@@ -33,7 +33,7 @@ Educa is a comprehensive Django-based platform that combines an eLearning app wi
 - Social following system
 - Activity stream for users
 - Image likes and favorites
-![alt-text](demo/social-screenshot.jpg)
+![alt-text](./demo/social-screenshot.jpg)
 
 ### 🛍️ Online Shop
 - Product catalog with categories
@@ -43,7 +43,7 @@ Educa is a comprehensive Django-based platform that combines an eLearning app wi
 - PDF invoice generation
 - Product recommendations
 - Digital product delivery
-![alt-text](demo/shop-screenshot.jpg)
+![alt-text](./demo/shop-screenshot.jpg)
 
 ## 🚀 Installation
 
@@ -83,8 +83,9 @@ Key settings in `.env`:
 ```plaintext
 DEBUG=True
 SECRET_KEY=your-secret-key
-DATABASE_URL=postgresql://user:password@localhost:5432/educa
-REDIS_URL=redis://localhost:6379
+REDIS_HOST=localhost
+REDIS_POST=6379
+REDIS_DB=0
 STRIPE_PUBLIC_KEY=your-stripe-public-key
 STRIPE_SECRET_KEY=your-stripe-secret-key
 ```

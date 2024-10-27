@@ -28,7 +28,7 @@ SITE_ID = 1
 
 INSTALLED_APPS = [
     
-    # Custom auth app (overrides admin's auth templates)
+    # Custom auth app (placed at the top, to override admin's auth templates)
     'account.apps.AccountConfig',
 
     # Django's built-in apps
@@ -51,12 +51,13 @@ INSTALLED_APPS = [
     # Local apps
     'actions.apps.ActionsConfig',
     'blog.apps.BlogConfig',
+    'cart.apps.CartConfig',
     'courses.apps.CoursesConfig',
     'images.apps.ImagesConfig',
     'shop.apps.ShopConfig',
 
     # Debug toolbar third-party app 
-    # (placed at the buttom to ensure it can properly intercept and display debug information.)
+    # (placed at the buttom, to ensure it can properly intercept and display debug information.)
     'debug_toolbar',
 ]
 
@@ -86,6 +87,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'cart.context_processors.cart',
             ],
         },
     },
@@ -193,6 +195,8 @@ INTERNAL_IPS = [
     '127.0.0.1',
 ]
 
-REDIS_HOST = 'localhost'
-REDIS_PORT = 6379
-REDIS_DB = 0
+REDIS_HOST = config('REDIS_HOST')
+REDIS_POST = config('REDIS_POST')
+REDIS_DB = config('REDIS_DB')
+
+CART_SESSION_ID = 'cart'
