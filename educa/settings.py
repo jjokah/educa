@@ -196,7 +196,7 @@ INTERNAL_IPS = [
 ]
 
 REDIS_HOST = config('REDIS_HOST')
-REDIS_POST = config('REDIS_POST')
+REDIS_PORT = config('REDIS_PORT')
 REDIS_DB = config('REDIS_DB')
 
 CART_SESSION_ID = 'cart'
