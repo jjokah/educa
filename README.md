@@ -4,7 +4,7 @@
 [![Django](https://img.shields.io/badge/Django-5.0-green.svg)](https://www.djangoproject.com/)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-Educa is a comprehensive Django-based platform that combines an eLearning app with a blog, shop and social platform. _(from the book, Django By Example)_
+Educa is a comprehensive Django-based project integrating an eLearning platform with a blog system, an online shop and a social platform. 
 
 ## ✨ Core Features
 
@@ -126,18 +126,33 @@ educa/
 
 ### Functional Overview
 
-**Blog**
+**Blog:**
+- _post list, post details_
+- _pagination, post comments, email sharing_
+- _tagging, markdown, sitemap, RSS feed, search engine_
 ![alt-text](./demo/blog-func.jpg)
 
-**Social**
+**Social:**
+- _user account_
+- _social authentication_
+- _bookmarking, liking, infinite scroll_
+- _track user actions_
 ![alt-text](./demo/social-func1.jpg)
 ![alt-text](./demo/social-func2.jpg)
 
-**Shop**
+**Shop:**
+- _product listing, shopping cart, order creation_
+- _ordering management, payment integration_
+- _coupon system, recommendation engine_
+- _internationalization_
 ![alt-text](./demo/shop-func1.jpg)
 ![alt-text](./demo/shop-func2.jpg)
 
-**eLearning**
+**E-Learning:**
+- _content management system_
+- _rendering and caching content_
+- _API views and end points_
+- _chat server_
 ![alt-text](./demo/elearning-func1.jpg)
 ![alt-text](./demo/elearning-func2.jpg)
 
@@ -145,11 +160,10 @@ educa/
 ### Key Technologies
 
 - **Frontend**:
+  - HTML/CSS
   - JavaScript/jQuery
   - AJAX for dynamic loading
-  - WebSockets for real-time features
   - Custom bookmarklet
-  - Bootstrap
 
 - **Backend**:
   - Django
@@ -162,6 +176,7 @@ educa/
 - **Additional Tools**:
   - Pillow for image processing
   - WeasyPrint for PDF generation
+  - WebSockets for real-time features
   - django-taggit for tagging
   - Easy-thumbnails for image thumbnails
 
@@ -170,7 +185,7 @@ educa/
 
 ## 🚀 Deployment
 
-Deployment instructions for production (PythonAnywhere):
+Deployment instructions for production:
 
 1. Set up server with required dependencies
 2. Configure nginx/gunicorn
@@ -179,3 +194,6 @@ Deployment instructions for production (PythonAnywhere):
 5. Set up Redis and Celery
 6. Configure static/media files serving
 7. Set environment variables
+
+## Acknowledgement
+Thanks to the **Antonio Melé** for his book, _**Django By Example** which this project is based on._
