@@ -1,31 +1,38 @@
 {% load static %}
+{# Base template that defines the common structure for all shop pages #}
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8" />
+    {# Dynamic title block that can be overridden by child templates #}
     <title>{% block title %}My shop{% endblock title %}</title>
+    {# Include base CSS styles #}
     <link href="{% static "shop/css/base.css" %}" rel="stylesheet">
   </head>
   <body>
+    {# Header section with shop logo/link #}
     <div id="header">
       <a href="/shop" class="logo">My shop</a>
     </div>
     {# Subheader containing shopping cart summary: total_items & total_price #}
     <div id="subheader">
       <div class="cart">
+        {# Create total_items variable from cart length #}
         {% with total_items=cart|length %}
           {% if total_items > 0 %}
             Your cart:
+            {# Link to cart detail with item count and total price #}
             <a href="{% url "cart:cart_detail" %}">
               {{ total_items }} item{{ total_items|pluralize }},
               ${{ cart.get_total_price }}
             </a>
-          {% else %}
+          {% elif not order %}
             Your cart is empty.
           {% endif %}
         {% endwith %}
       </div>
     </div>
+    {# Main content block that child templates will fill #}
     <div id="content">
       {% block content %}
       {% endblock content %}

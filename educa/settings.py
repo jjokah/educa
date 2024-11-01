@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'cart.apps.CartConfig',
     'courses.apps.CoursesConfig',
     'images.apps.ImagesConfig',
+    'orders.apps.OrdersConfig',
     'shop.apps.ShopConfig',
 
     # Debug toolbar third-party app 
