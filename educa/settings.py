@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.postgres',
 
     # Third-party apps
+    'anymail',
     'django_extensions',
     'easy_thumbnails',
     'social_django',
@@ -142,15 +143,14 @@ MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 
-# Email server configuration
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# # Email server configuration
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = config('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
+EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
 DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
+SERVER_EMAIL = config('SERVER_EMAIL')
+MAILGUN_API_KEY = config('MAILGUN_API_KEY')  
+MAILGUN_SENDER_DOMAIN = config('MAILGUN_SENDER_DOMAIN')
 
 
 # Login and authentication
