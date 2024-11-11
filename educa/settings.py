@@ -143,14 +143,14 @@ MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 
-# # Email server configuration
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# Email server configuration
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
-DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
-SERVER_EMAIL = config('SERVER_EMAIL')
-MAILGUN_API_KEY = config('MAILGUN_API_KEY')  
-MAILGUN_SENDER_DOMAIN = config('MAILGUN_SENDER_DOMAIN')
+# EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
+# DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
+# SERVER_EMAIL = config('SERVER_EMAIL')
+# MAILGUN_API_KEY = config('MAILGUN_API_KEY')  
+# MAILGUN_SENDER_DOMAIN = config('MAILGUN_SENDER_DOMAIN')
 
 
 # Login and authentication
@@ -201,3 +201,6 @@ REDIS_PORT = config('REDIS_PORT')
 REDIS_DB = config('REDIS_DB')
 
 CART_SESSION_ID = 'cart'
+
+# Celery Configuration
+CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True

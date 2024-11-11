@@ -4,6 +4,7 @@ from cart.cart import Cart
 
 from .forms import OrderCreateForm
 from .models import OrderItem
+from .tasks import order_created
 
 
 def order_create(request):
@@ -41,6 +42,8 @@ def order_create(request):
                 )
             # Empty the cart after order creation
             cart.clear()
+            # Launch asynchronous task
+            order_created.delay(order.id)
             
             # Render success page
             return render(
