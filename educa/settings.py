@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'courses.apps.CoursesConfig',
     'images.apps.ImagesConfig',
     'orders.apps.OrdersConfig',
+    'payment.apps.PaymentConfig',
     'shop.apps.ShopConfig',
 
     # Debug toolbar third-party app 
@@ -204,3 +205,10 @@ CART_SESSION_ID = 'cart'
 
 # Celery Configuration
 CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
+
+# Payment Variables
+PAYSTACK_TEST_SECRET_KEY=config('PAYSTACK_TEST_SECRET_KEY')
+PAYSTACK_PAYMENT_URL=config('PAYSTACK_PAYMENT_URL')
+
+FLUTTERWAVE_TEST_SECRET_KEY=config('FLUTTERWAVE_TEST_SECRET_KEY')
+FLUTTERWAVE_PAYMENT_URL=config('FLUTTERWAVE_PAYMENT_URL')
