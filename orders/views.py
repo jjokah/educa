@@ -1,9 +1,10 @@
-from django.shortcuts import redirect, render
+from django.contrib.admin.views.decorators import staff_member_required
+from django.shortcuts import get_object_or_404, redirect, render
 
 from cart.cart import Cart
 
 from .forms import OrderCreateForm
-from .models import OrderItem
+from .models import Order, OrderItem
 from .tasks import order_created
 
 
@@ -42,7 +43,7 @@ def order_create(request):
                 )
             # Empty the cart after order creation
             cart.clear()
-            # Launch asynchronous task
+            # Launch asynchronous task to send confirmation email
             order_created.delay(order.id)
             # Set the order in the session
             request.session['order_id'] = order.id
@@ -56,4 +57,15 @@ def order_create(request):
         request,
         'orders/order/create.html',
         {'cart': cart, 'form': form}
+    )
+
+
+@staff_member_required
+def admin_order_detail(request, order_id):
+    """
+    Display detailed order information for admin users (staff only)
+    """
+    order = get_object_or_404(Order, id=order_id)
+    return render(
+        request, 'admin/orders/order/detail.html', {'order': order}
     )
