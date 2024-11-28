@@ -1,7 +1,7 @@
 # Educa - Integrated Learning & Social Platform
 
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/downloads/)
-[![Django](https://img.shields.io/badge/Django-5.0-green.svg)](https://www.djangoproject.com/)
+[![Django](https://img.shields.io/badge/Django-5.1-green.svg)](https://www.djangoproject.com/)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 Educa is a comprehensive Django-based project integrating an eLearning platform with a blog system, an online shop and a social platform. 
@@ -48,11 +48,11 @@ Educa is a comprehensive Django-based project integrating an eLearning platform 
 ## 🚀 Installation
 
 ### Prerequisites
-- Python 3.9+
-- PostgreSQL
-- Redis
-- RabbitMQ/Redis (for Celery)
-- Pillow dependencies for image processing
+- Python 3.10+
+- [PostgreSQL](https://www.postgresql.org/download/) (database)
+- [Redis](https://redis.io/docs/latest/operate/oss_and_stack/install/install-redis/) (caching)
+- [RabbitMQ](https://www.rabbitmq.com/docs/download) (async)
+- [WeasyPrint](https://doc.courtbouillon.org/weasyprint/stable/first_steps.html#installation) (pdf)
 
 ### Setup Steps
 
