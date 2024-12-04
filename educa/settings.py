@@ -6,7 +6,10 @@ from decouple import config
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = config('DJANGO_SECRET_KEY')
+SECRET_KEY = config(
+    'DJANGO_SECRET_KEY', 
+    default='django-insecure-pt8tc*1bc&f1mlb^5qgkb8pp1()zf$s0aazhgw^_br&_el(r%x'
+)
 
 DEBUG = True
 
@@ -162,8 +165,8 @@ AUTHENTICATION_BACKENDS = [
 
 # TODO: Fix Error 401: invalid_client -- Request details: flowName=GeneralOAuthFlow
 
-SOCAIL_AUTH_GOOGLE_OAUTH2_KEY = config('GOOGLE_OAUTH2_KEY')
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = config('GOOGLE_OAUTH2_SECRET')
+SOCAIL_AUTH_GOOGLE_OAUTH2_KEY = config('GOOGLE_OAUTH2_KEY', default='')
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = config('GOOGLE_OAUTH2_SECRET', default='')
 
 SOCIAL_AUTH_PIPELINE = [
     'social_core.pipeline.social_auth.social_details',
@@ -192,9 +195,9 @@ INTERNAL_IPS = [
     '127.0.0.1',
 ]
 
-REDIS_HOST = config('REDIS_HOST')
-REDIS_PORT = config('REDIS_PORT')
-REDIS_DB = config('REDIS_DB')
+REDIS_HOST = config('REDIS_HOST', default='localhost')
+REDIS_PORT = config('REDIS_PORT', default=6379)
+REDIS_DB = config('REDIS_DB', default=0)
 
 CART_SESSION_ID = 'cart'
 
@@ -202,5 +205,5 @@ CART_SESSION_ID = 'cart'
 CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
 
 # Payment Variables
-PAYSTACK_SECRET_KEY=config('PAYSTACK_SECRET_KEY')
-PAYSTACK_PAYMENT_URL=config('PAYSTACK_PAYMENT_URL')
+PAYSTACK_SECRET_KEY=config('PAYSTACK_SECRET_KEY', default='')
+PAYSTACK_PAYMENT_URL=config('PAYSTACK_PAYMENT_URL', default='')
