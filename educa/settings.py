@@ -1,4 +1,3 @@
-import os
 from pathlib import Path
 from django.urls import reverse_lazy
 from decouple import config
@@ -7,21 +6,13 @@ from decouple import config
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-pt8tc*1bc&f1mlb^5qgkb8pp1()zf$s0aazhgw^_br&_el(r%x'
+SECRET_KEY = config('DJANGO_SECRET_KEY')
 
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    '127.0.0.1',
-    'localhost',
-    'hare-vital-overly.ngrok-free.app',
-    'hare-vital-overly.com',
-    'jjokah.pythonanywhere.com',
-]
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1').split(',')
+CSRF_TRUSTED_ORIGINS = config('CSRF_TRUSTED_ORIGINS', default='').split(',')
 
-CSRF_TRUSTED_ORIGINS = [
-    'https://hare-vital-overly.ngrok-free.app',
-]
 
 SITE_ID = 1
 
@@ -98,11 +89,14 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'educa.wsgi.application'
 
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': config('DATABASE_ENGINE', default='django.db.backends.sqlite3'),
+        'NAME': config('DATABASE_NAME', default=BASE_DIR / 'db.sqlite3'),
+        'USER': config('DATABASE_USER', default=''),
+        'PASSWORD': config('DATABASE_PASSWORD', default=''),
+        'HOST': config('DATABASE_HOST', default=''),
+        'PORT': config('DATABASE_PORT', default=''),
     }
 }
 # Default primary key field type
@@ -138,20 +132,21 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 
 # Email server configuration
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
-# EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
-# DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
-# SERVER_EMAIL = config('SERVER_EMAIL')
-# MAILGUN_API_KEY = config('MAILGUN_API_KEY')  
-# MAILGUN_SENDER_DOMAIN = config('MAILGUN_SENDER_DOMAIN')
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+else:
+    EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
+    DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
+    SERVER_EMAIL = config('SERVER_EMAIL')
+    MAILGUN_API_KEY = config('MAILGUN_API_KEY')  
+    MAILGUN_SENDER_DOMAIN = config('MAILGUN_SENDER_DOMAIN')
 
 
 # Login and authentication
@@ -207,8 +202,5 @@ CART_SESSION_ID = 'cart'
 CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
 
 # Payment Variables
-PAYSTACK_TEST_SECRET_KEY=config('PAYSTACK_TEST_SECRET_KEY')
+PAYSTACK_SECRET_KEY=config('PAYSTACK_SECRET_KEY')
 PAYSTACK_PAYMENT_URL=config('PAYSTACK_PAYMENT_URL')
-
-FLUTTERWAVE_TEST_SECRET_KEY=config('FLUTTERWAVE_TEST_SECRET_KEY')
-FLUTTERWAVE_PAYMENT_URL=config('FLUTTERWAVE_PAYMENT_URL')
