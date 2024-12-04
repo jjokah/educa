@@ -64,7 +64,7 @@ cd educa
 
 2. Create and activate virtual environment:
 ```bash
-python -m venv .venv
+python3 -m venv .venv
 source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 ```
 
@@ -76,18 +76,34 @@ pip install -r requirements.txt
 4. Configure environment variables:
 ```bash
 touch .env
-# Edit .env file with your settings
+# Edit .env file with your production/development settings
 ```
 Key settings in `.env`:
 
 ```plaintext
 DEBUG=True
-SECRET_KEY=your-secret-key
+DJANGO_SECRET_KEY=your-secret-key
+ALLOWED_HOSTS=127.0.0.1,localhost,0.0.0.0,your-ngrok-domin-name.ngrok.app,your-domin-name.com
+CSRF_TRUSTED_ORIGINS=https://your-ngrok-domain-name.ngrok-free.app,https://your-domin-name.com
+
+DATABASE_ENGINE=django.db.backends.postgresql
+DATABASE_NAME=your-db-name
+DATABASE_USER=your-db-user
+DATABASE_PASSWORD=your-db-password
+DATABASE_HOST=localhost
+DATABASE_POST=5432
+
 REDIS_HOST=localhost
 REDIS_POST=6379
 REDIS_DB=0
-STRIPE_PUBLIC_KEY=your-stripe-public-key
-STRIPE_SECRET_KEY=your-stripe-secret-key
+
+DEFAULT_FROM_EMAIL=mail@your-domain-name.com
+SERVER_EMAIL=server@your-domain-name.com
+MAILGUN_API_KEY=your-mailgun-api-key
+MAILGUN_SENDER_DOMAIN=mg.your-domain-name.com
+
+PAYSTACK_SECRET_KEY=your-paystack-secret-key
+PAYSTACK_PAYMENT_URL=your-paystack-url
 ```
 
 5. Initialize the database:
@@ -132,27 +148,36 @@ educa/
 - _tagging, markdown, sitemap, RSS feed, search engine_
 ![alt-text](./demo/blog-func.jpg)
 
+__
+
 **Social:**
 - _user account_
 - _social authentication_
 - _bookmarking, liking, infinite scroll_
 - _track user actions_
+
 ![alt-text](./demo/social-func1.jpg)
 ![alt-text](./demo/social-func2.jpg)
+
+__
 
 **Shop:**
 - _product listing, shopping cart, order creation_
 - _ordering management, payment integration_
 - _coupon system, recommendation engine_
 - _internationalization_
+
 ![alt-text](./demo/shop-func1.jpg)
 ![alt-text](./demo/shop-func2.jpg)
+
+__
 
 **E-Learning:**
 - _content management system_
 - _rendering and caching content_
 - _API views and end points_
 - _chat server_
+
 ![alt-text](./demo/elearning-func1.jpg)
 ![alt-text](./demo/elearning-func2.jpg)
 
@@ -179,6 +204,9 @@ educa/
   - WebSockets for real-time features
   - django-taggit for tagging
   - Easy-thumbnails for image thumbnails
+  - Google OAuth2 for social authentication
+  - Paystack for payment
+  - Mailgun for emails
 
 
 
@@ -192,6 +220,9 @@ Deployment instructions for production:
 3. Set up SSL certificates
 4. Configure PostgreSQL
 5. Set up Redis and Celery
+6. Set up Mailgun
+7. Set up GoogleAuth
+8. Set up Paystack
 6. Configure static/media files serving
 7. Set environment variables
 
