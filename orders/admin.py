@@ -54,6 +54,16 @@ def export_to_csv(modeladmin, request, queryset):
 export_to_csv.short_description = 'Export to CSV'
 
 
+def order_pdf(obj):
+    """
+    Generate a PDF link for an order in the admin interface.
+    """
+    url = reverse('orders:admin_order_pdf', args=[obj.id])
+    return mark_safe(f'<a href="{url}">PDF</a>')
+
+order_pdf.short_description = 'Invoice'
+
+
 class OrderItemInlne(admin.TabularInline):
     """
     Inline admin interface for OrderItem model that allows editing order items
@@ -82,6 +92,7 @@ class OrderAdmin(admin.ModelAdmin):
         'created',
         'updated',
         order_detail,
+        order_pdf,
     ]
     # Fields available for filtering orders in the admin interface
     list_filter = ['paid', 'created', 'updated']

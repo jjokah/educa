@@ -33,7 +33,7 @@ def payment_process(request):
 
         # Paystack payment session configuration
         payment_url = settings.PAYSTACK_PAYMENT_URL
-        secret_key = settings.PAYSTACK_TEST_SECRET_KEY
+        secret_key = settings.PAYSTACK_SECRET_KEY
         paystack_metadata = json.dumps({
             'order_id': str(order_id),
             'cancel_action': cancel_url,
@@ -57,36 +57,6 @@ def payment_process(request):
             return redirect(redirect_url, code=303)
         else:
             return render(request, 'payment/process.html', locals())
-
-        # Flutterwave implementation commented out but documented for future reference
-        # Similar flow to Paystack but with different API structure
-        # # Flutterwave payment session
-        # payment_url = settings.FLUTTERWAVE_PAYMENT_URL
-        # secret_key = settings.FLUTTERWAVE_TEST_SECRET_KEY
-        # flutterwave_metadata = json.dumps({
-        #     'cancel_url': cancel_url,
-        # })
-        # flutterwave_session_data = {
-        #     'txt_ref': str(order_id),
-        #     'amount': int(order.get_total_cost()),
-        #     'currency': 'NGN',
-        #     'redirect_url': success_url,
-        #     'customer': {
-        #         'email': str(order.email)
-        #     },
-        #     'meta': flutterwave_metadata,
-        # }
-        # headers = {'Authorization': f'Bearer {secret_key}'}
-        # response = requests.post(payment_url, flutterwave_session_data, headers=headers)
-        # print(response)
-        # response = response.json()
-        # if response['status'] == 'successful':
-        #     redirect_url = response['data']['link']
-        #     return redirect(redirect_url, code=303)
-        # elif response['status'] == 'cancelled':
-        #     return redirect(cancel_url, code=303)
-        # else:
-        #     return render(request, 'payment/process.html', locals())
     else:
         return render(request, 'payment/process.html', locals())
     
