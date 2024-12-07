@@ -65,7 +65,7 @@ cd educa
 2. Create and activate virtual environment:
 ```bash
 python3 -m venv .venv
-source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+source .venv/bin/activate  # On Windows: `source .venv\Scripts\activate`
 ```
 
 3. Install dependencies:
@@ -75,12 +75,14 @@ pip install -r requirements.txt
 
 4. Configure environment variables:
 ```bash
-touch .env
-# Edit .env file with your production/development settings
+touch .env  # On Windows: `New-Item .env`
 ```
+
+_Edit `.env` file with your production/development settings_
+
 Key settings in `.env`:
 
-```plaintext
+```shell
 DEBUG=True
 DJANGO_SECRET_KEY=your-secret-key
 ALLOWED_HOSTS=127.0.0.1,localhost,0.0.0.0,your-ngrok-domin-name.ngrok.app,your-domin-name.com
@@ -125,19 +127,20 @@ python manage.py runserver
 ### Applications Structure
 ```
 educa/
-├── courses/        # App for managing courses
+├── account/        # User management
+├── actions/        # Tracking user activities
 ├── blog/           # Blog system
-├── action/         # Tracking user activities
 ├── cart/           # Shopping cart functionalities
-├── images/         # Social bookmarking
-├── shop/           # Online shop
-├── accounts/       # User management
-├── chat/           # Real-time messaging
-├── templates/      # HTML templates for the frontend
-├── static/         # Static assets (CSS, JS, images)
+├── courses/        # App for managing courses
+├── demo/           # Includes demonstration content
 ├── educa/          # Main project dir (settings, URLs, etc)
-└── common/         # Shared utilities
-
+├── images/         # Social bookmarking
+├── orders/         # Manages customer orders
+├── payment/        # Handles payment processing
+├── shop/           # Online shop
+├── static/         # Static assets (CSS, JS, images)
+├── templates/      # HTML templates for the frontend
+.
 ```
 
 ### Functional Overview
@@ -206,7 +209,7 @@ __
   - Easy-thumbnails for image thumbnails
   - Google OAuth2 for social authentication
   - Paystack for payment
-  - Mailgun for emails
+  - Mailgun for mailing
 
 
 
@@ -227,4 +230,4 @@ Deployment instructions for production:
 7. Set environment variables
 
 ## Acknowledgement
-Thanks to the **Antonio Melé** for his book, _**Django By Example** which this project is based on._
+Thanks to the [Antonio Melé](https://antoniomele.es/) for his book - _[Django By Example](https://djangobyexample.com/), which this project is based on._
