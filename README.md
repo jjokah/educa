@@ -82,7 +82,7 @@ _Edit `.env` file with your production/development settings_
 
 Key settings in `.env`:
 
-```shell
+```
 DEBUG=True
 DJANGO_SECRET_KEY=your-secret-key
 ALLOWED_HOSTS=127.0.0.1,localhost,0.0.0.0,your-ngrok-domin-name.ngrok.app,your-domin-name.com

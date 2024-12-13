@@ -5,7 +5,9 @@ import json
 from django.conf import settings
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
+
 from orders.models import Order
+from .tasks import payment_completed
 
 
 @csrf_exempt
@@ -63,6 +65,8 @@ def paystack_webhook(request):
             # Update order payment status
             order.paid = True
             order.save()
+            # Lanch asynchronous task
+            payment_completed.delay(order.id)
     
     # Return success response
     return HttpResponse(status=200)
