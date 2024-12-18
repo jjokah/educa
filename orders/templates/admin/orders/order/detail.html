@@ -1,5 +1,7 @@
 {% extends "admin/base_site.html" %}
 
+{# Template for displaying detailed order information in admin interface #}
+
 {% block title %}
   Order {{ order.id }} {{ block.super }}
 {% endblock title %}
@@ -73,6 +75,7 @@
         </tr>
       </thead>
       <tbody>
+        {# Loop through order items and display their details #}
         {% for item in order.items.all %}
           <tr class="row{% cycle "1" "2" %}">
             <td>{{ item.product.name }}</td>
@@ -81,9 +84,30 @@
             <td class="num">${{ item.get_cost }}</td>
           </tr>
         {% endfor %}
+
+        {# Display coupon discount information if a coupon was applied #}
+        {% if order.coupon %}
+          <tr class="subtotal">
+            <td colspan="3">Subtotal</td>
+            <td class="num">
+              ${{ order.get_total_cost_before_discount|floatformat:2 }}
+            </td>
+          </tr>
+          <tr>
+            <td colspan="3">
+              "{{ order.coupon.code }}" coupon
+              ({{ order.discount }}% off)
+            </td>
+            <td class="num neg">
+              - ${{ order.get_discount|floatformat:2 }}
+            </td>
+          </tr>
+        {% endif %}
+
+        {# Display final total cost #}
         <tr class="total">
           <td colspan="3">Total</td>
-          <td class="num">${{ order.get_total_cost }}</td>
+          <td class="num">${{ order.get_total_cost|floatformat:2 }}</td>
         </tr>
       </tbody>
     </table>

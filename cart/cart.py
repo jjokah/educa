@@ -1,9 +1,14 @@
 from decimal import Decimal
 from django.conf import settings
+
+from coupons.models import Coupon
 from shop.models import Product
 
 
 class Cart:
+    """
+    A shopping cart class that handles product storage and manipulation in session.
+    """
     def __init__(self, request):
         """
         Initialize the cart.
@@ -14,6 +19,8 @@ class Cart:
             # Save an empty cart in the sesssion
             cart = self.session[settings.CART_SESSION_ID] = {}
         self.cart = cart
+        # Store current applied coupon
+        self.coupon_id = self.session.get('coupon_id')
 
     def __iter__(self):
         """
@@ -62,17 +69,52 @@ class Cart:
             del self.cart[product_id]
             self.save()
 
+    @property
+    def coupon(self):
+        """
+        Get the current coupon applied to cart.
+        """
+        if self.coupon_id:
+            try:
+                return Coupon.objects.get(id=self.coupon_id)
+            except Coupon.DoesNotExist:
+                pass
+        return None
+        
+    def get_discount(self):
+        """
+        Calculate the discount amount based on coupon
+        """
+        if self.coupon:
+            return (
+                self.coupon.discount / Decimal(100)
+            ) * self.get_total_price()
+        return Decimal(0)
+
     def get_total_price(self):
+        """
+        Calculate total price of all items in cart before discount.
+        """
         return sum(
             Decimal(item['price']) * item['quantity']
             for  item in self.cart.values()
         )
     
+    def get_total_price_after_discount(self):
+        """
+        Calculate the final price after applying discount.
+        """
+        return self.get_total_price() - self.get_discount()
+    
     def clear(self):
-        # Remove cart from session
+        """
+        Remove all items from cart and save session.
+        """
         del self.session[settings.CART_SESSION_ID]
         self.save()
 
     def save(self):
-        # Mark the session as "modified" to make sure it gets saved
+        """
+        Mark the session as "modified" to make sure it gets saved.
+        """
         self.session.modified = True

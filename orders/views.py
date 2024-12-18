@@ -41,7 +41,13 @@ def order_create(request):
         form = OrderCreateForm(request.POST)
         if form.is_valid():
             # Create new order instance
-            order = form.save()
+            order = form.save(commit=False)
+            
+            # Apply coupon discount if available in cart
+            if cart.coupon:
+                order.coupon = cart.coupon
+                order.discount = cart.coupon.discount
+            order.save()
             
             # Create OrderItem for each product in cart
             for item in cart:

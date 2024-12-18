@@ -131,9 +131,10 @@ educa/
 ├── actions/        # Tracking user activities
 ├── blog/           # Blog system
 ├── cart/           # Shopping cart functionalities
+├── coupons/        # Handles discount coupons
 ├── courses/        # App for managing courses
 ├── demo/           # Includes demonstration content
-├── educa/          # Main project dir (settings, URLs, etc)
+├── educa/          # Project core configurations
 ├── images/         # Social bookmarking
 ├── orders/         # Manages customer orders
 ├── payment/        # Handles payment processing

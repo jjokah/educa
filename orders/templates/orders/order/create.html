@@ -1,5 +1,7 @@
 {% extends "shop/base.html" %}
 
+{# Template for order creation/checkout page that extends the base shop template #}
+
 {# Page title block #}
 {% block title %}
   Checkout
@@ -17,12 +19,19 @@
         <li>
           {# Display quantity, product name and price for each item #}
           {{ item.quantity }}x {{ item.product.name }}
-          <span>${{ item.total_price }}</span>
+          <span>${{ item.total_price|floatformat:2 }}</span>
         </li>
       {% endfor %}
+      {# Display coupon discount if applied #}
+      {% if cart.coupon %}
+        <li>
+          "{{ cart.coupon.code }}" ({{ cart.coupon.discount }}% off)
+          <span class="neg">- ${{ cart.get_discount|floatformat:2 }}</span>
+        </li>
+      {% endif %}
     </ul>
     {# Display cart total #}
-    <p>Total: ${{ cart.get_total_price }}</p>
+    <p>Total: ${{ cart.get_total_price_after_discount|floatformat:2 }}</p>
   </div>
 
   {# Order submission form #}

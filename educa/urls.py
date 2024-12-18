@@ -15,32 +15,27 @@ sitemaps = {
 
 
 urlpatterns = [
-    path("accounts/login/", 
+    path('accounts/login/', 
          auth_views.LoginView.as_view(template_name='courses/registration/login.html'), 
-         name="login"
-    ),
-    path("accounts/logout/", 
+         name="login"),
+    path('accounts/logout/', 
          auth_views.LogoutView.as_view(template_name='courses/registration/logout.html', next_page='/'), 
-         name="logout"
-    ),
-    path("admin/", admin.site.urls),
+         name='logout'),
+    path('admin/', admin.site.urls),
     path('account/', include('account.urls')),
-    path(
-        'social-auth/',
-        include('social_django.urls', namespace='social')
-    ),
+    path('social-auth/',
+         include('social_django.urls', namespace='social')),
     path('blog/', include('blog.urls', namespace='blog')),
-    path(
-        'sitemap.xml',
-        sitemap,
-        {'sitemaps': sitemaps},
-        name='django.contrib.sitemaps.views.sitemap',
-    ),
+    path('sitemap.xml',
+         sitemap,
+         {'sitemaps': sitemaps},
+         name='django.contrib.sitemaps.views.sitemap',),
     path('cart/', include('cart.urls', namespace='cart')),
     path('course/', include('courses.urls')),
     path('images/', include('images.urls', namespace='images')),
     path('orders/', include('orders.urls', namespace='orders')),
     path('payment/', include('payment.urls', namespace='payment')),
+    path('coupons/', include('coupons.urls', namespace='coupons')),
     path('shop/', include('shop.urls', namespace='shop')),
     path('__debug__/', include('debug_toolbar.urls')),
 ]

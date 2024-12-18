@@ -29,10 +29,34 @@
           <td class="num">${{ item.get_cost }}</td>
         </tr>
       {% endfor %}
-      {# Order total row #}
+
+      {# Coupon and Discount Section - Only displays if coupon is applied #}
+      {% if order.coupon %}
+        <tr class="subtotal">
+          <td>Subtotal</td>
+          <td colspan="3"></td>
+          <td class="num">
+            ${{ order.get_total_cost_before_discount|floatformat:2 }}
+          </td>
+        </tr>
+        <tr>
+          {# Displays applied coupon code and discount percentage #}
+          <td>
+            "{{ order.coupon.code }}" coupon
+            ({{ order.discount }}% off)
+          </td>
+          <td colspan="3"></td>
+          <td class="num neg">
+            - ${{ order.get_discount|floatformat:2 }}
+          </td>
+        </tr>
+      {% endif %}
+      {# Order final total section #}
       <tr class="total">
         <td colspan="4">Total</td>
-        <td class="num">${{ order.get_total_cost }}</td>
+        <td class="num">
+          ${{ order.get_total_cost|floatformat:2 }}
+        </td>
       </tr>
     </tbody>
   </table>
