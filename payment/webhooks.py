@@ -7,6 +7,8 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
 from orders.models import Order
+from shop.models import Product
+from shop.recommender import Recommender
 from .tasks import payment_completed
 
 
@@ -49,7 +51,7 @@ def paystack_webhook(request):
         # Return 400 for invalid signature
         return HttpResponse(status=400)
 
-    # Process successful payment notification
+    # Process successful payment notification from Paystack
     if event == 'charge.success':
         data = body['data']
         # Retrieve order ID from payment metadata
@@ -62,11 +64,18 @@ def paystack_webhook(request):
             except Order.DoesNotExist:
                 # Return 404 if order doesn't exist
                 return HttpResponse(status=404)
-            # Update order payment status
+            # Mark order as paid in the database
             order.paid = True
             order.save()
-            # Lanch asynchronous task
+
+            # Update product recommendations based on purchase
+            product_ids = order.items.values_list('product_id')
+            products = Product.objects.filter(id__in=product_ids)
+            r = Recommender()
+            r.products_bought(products)
+
+            # Trigger async task for additional payment completion processing
             payment_completed.delay(order.id)
     
-    # Return success response
+    # Return success response for webhook processing
     return HttpResponse(status=200)

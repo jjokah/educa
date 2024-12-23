@@ -1,6 +1,8 @@
 {% extends "shop/base.html" %}
 {% load static %}
 
+{# Template for displaying detailed product information and purchase options #}
+
 {# Define the title block with the product name #}
 {% block title %}
   {{ product.name }}
@@ -12,12 +14,15 @@
     {# Product image: display product image if available, otherwise show a placeholder #}
     <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "shop/img/no_image.png" %}{% endif %}">
     
+    {# Product name heading #}
     <h1>{{ product.name }}</h1>
+    {# Category link with name #}
     <h2>
       <a href="{{ product.category.get_absolute_url }}">
         {{ product.category }}
       </a>
     </h2>
+    {# Product price display #}
     <p class="price">${{ product.price }}</p>
 
     {# Product add to cart form, with quantity input field #}
@@ -26,7 +31,24 @@
       {% csrf_token %}
       <input type="submit" value="Add to cart">
     </form>
-
+    {# Product description with line breaks preserved #} 
     {{ product.description|linebreaks }}
+
+    {# Recommended products section #}
+    {# Shows related products that other customers purchased #}
+    {% if recommended_products %}
+      <div class="recommendations">
+        <h3>People who bought this also bought</h3>
+        {% for p in recommended_products %}
+          <div class="item">
+            <a href="{{ p.get_absolute_url }}">
+              <img src="{% if p.image %}{{ p.image.url }}{% else %}
+              {% static "shop/img/no_image.png" %}{% endif %}">
+            </a>
+            <p><a href="{{ p.get_absolute_url }}">{{ p.name }}</a></p>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
   <div>
 {% endblock content %}

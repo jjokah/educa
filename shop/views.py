@@ -1,11 +1,14 @@
 from django.shortcuts import get_object_or_404, render
+
 from cart.forms import CartAddProductForm
+
 from .models import Category, Product
+from .recommender import Recommender
 
 
 def product_list(request, category_slug=None):
     """
-    View function for displaying a list of products.
+    Get a list of available products, optionally filtered by category.
     """
     category = None
     categories = Category.objects.all()
@@ -27,14 +30,24 @@ def product_list(request, category_slug=None):
 
 def product_detail(request, id, slug):
     """
-    View function for displaying details of a specific product.
+    Get detailed information about of a specific product
+    and form for adding product to cart.
     """
+    # Get product or return 404 if not found/unavailable
     product = get_object_or_404(
         Product, id=id, slug=slug, available=True
     )
+    # Initialize the cart add form
     cart_product_form = CartAddProductForm()
+    # Get product recommendations
+    r = Recommender()
+    recommended_products = r.suggest_products_for([product], 4)
     return render(
         request,
         'shop/product/detail.html',
-        {'product': product, 'cart_product_form': cart_product_form}
+        {
+            'product': product, 
+            'cart_product_form': cart_product_form,
+            'recommended_products': recommended_products
+        }
     )
