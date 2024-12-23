@@ -1,8 +1,9 @@
 {% extends "shop/base.html" %}
 {% load static %}
 
-{% block content %}
-  {# Order summary section display cart details #}
+{# Payment Processing Template - Order summary #}
+
+{% block content %}  
   <h1>Order summary</h1>
   <table class="cart">
     <thead>
@@ -16,12 +17,12 @@
       </tr>
     </thead>
     <tbody>
-      {# Iterate through each item in the order #}
+      {# Order Detail Section - Lists all items in the order #}
       {% for item in order.items.all %}
-        {# Alternate row styling using cycle #}
+        {# Zebra striping style for rows using cycle #}
         <tr class="row{% cycle "1" "2" %}">
           <td>
-            <img src="{% if item.product.image %}{{ item.product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}">
+            <img src="{% if item.product.image %}{{ item.product.image.url }}{% else %}{% static "shop/img/no_image.png" %}{% endif %}">
           </td>
           <td>{{ item.product.name }}</td>
           <td class="num">${{ item.price }}</td>
@@ -30,7 +31,7 @@
         </tr>
       {% endfor %}
 
-      {# Coupon and Discount Section - Only displays if coupon is applied #}
+      {# Coupon Discount Section - Displays subtotal and discount if coupon applied #}
       {% if order.coupon %}
         <tr class="subtotal">
           <td>Subtotal</td>
@@ -40,7 +41,7 @@
           </td>
         </tr>
         <tr>
-          {# Displays applied coupon code and discount percentage #}
+          {# Applied coupon details with discount percentage #}
           <td>
             "{{ order.coupon.code }}" coupon
             ({{ order.discount }}% off)
@@ -51,7 +52,8 @@
           </td>
         </tr>
       {% endif %}
-      {# Order final total section #}
+
+      {# Final Total Section - Displays total cost after all discounts #}
       <tr class="total">
         <td colspan="4">Total</td>
         <td class="num">
@@ -60,7 +62,7 @@
       </tr>
     </tbody>
   </table>
-  {# Payment form #}
+  {# Payment form - Submits to payment processing URL #}
   <form action="{% url "payment:process" %}" method="post">
     <input type="submit" value="Pay now">
     {% csrf_token %}
