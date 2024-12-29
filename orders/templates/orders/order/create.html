@@ -1,18 +1,19 @@
 {% extends "shop/base.html" %}
+{% load i18n %}
 
 {# Template for order creation/checkout page that extends the base shop template #}
 
 {# Page title block #}
 {% block title %}
-  Checkout
+  {% translate "Checkout" %}
 {% endblock title %}
 
 {# Main content block #}
 {% block content %}
-  <h1>Checkout</h1>
+  <h1>{% translate "Checkout" %}</h1>
   {# Order summary section #}
   <div class="order-info">
-    <h3>Your order</h3>
+    <h3>{% translate "Your order" %}</h3>
     {# Cart items list #}
     <ul>
       {% for item in cart %}
@@ -25,20 +26,22 @@
       {# Display coupon discount if applied #}
       {% if cart.coupon %}
         <li>
-          "{{ cart.coupon.code }}" ({{ cart.coupon.discount }}% off)
+          {% blocktranslate with code=cart.coupon.code discount=cart.coupon.discount %}
+            "{{ code }}" ({{ discount }}% off)
+          {% endblocktranslate %}
           <span class="neg">- ${{ cart.get_discount|floatformat:2 }}</span>
         </li>
       {% endif %}
     </ul>
     {# Display cart total #}
-    <p>Total: ${{ cart.get_total_price_after_discount|floatformat:2 }}</p>
+    <p>{% translate "Total" %}: ${{ cart.get_total_price_after_discount|floatformat:2 }}</p>
   </div>
 
   {# Order submission form #}
   <form method="post" class="order-form">
     {# Render form fields using Django's built-in as_p method #}
     {{ form.as_p }}
-    <p><input type="submit" value="Place order"></p>
+    <p><input type="submit" value="{% translate "Place order" %}"></p>
     {# Django CSRF protection token #}
     {% csrf_token %}
   </form>

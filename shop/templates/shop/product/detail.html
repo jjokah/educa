@@ -1,5 +1,5 @@
 {% extends "shop/base.html" %}
-{% load static %}
+{% load i18n static %}
 
 {# Template for displaying detailed product information and purchase options #}
 
@@ -29,7 +29,7 @@
     <form action="{% url "cart:cart_add" product.id %}" method="post">
       {{ cart_product_form }}
       {% csrf_token %}
-      <input type="submit" value="Add to cart">
+      <input type="submit" value="{% translate "Add to cart" %}">
     </form>
     {# Product description with line breaks preserved #} 
     {{ product.description|linebreaks }}
@@ -38,7 +38,7 @@
     {# Shows related products that other customers purchased #}
     {% if recommended_products %}
       <div class="recommendations">
-        <h3>People who bought this also bought</h3>
+        <h3>{% translate "People who bought this also bought" %}</h3>
         {% for p in recommended_products %}
           <div class="item">
             <a href="{{ p.get_absolute_url }}">

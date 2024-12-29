@@ -1,4 +1,5 @@
 from django import forms
+from django.utils.translation import gettext_lazy as _
 
 
 # Create choices for product quantity dropdown (1-20)
@@ -12,7 +13,8 @@ class CartAddProductForm(forms.Form):
     """
     quantity = forms.TypedChoiceField(
         choices=PRODUCT_QUANTITY_CHOICES,
-        coerce=int  # Convert selected value to integer
+        coerce=int,  # Convert selected value to integer
+        label=_('Quantity')
     )
     override = forms.BooleanField(
         required=False,
