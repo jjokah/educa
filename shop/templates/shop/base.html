@@ -12,12 +12,17 @@
     <link href="{% static "shop/css/base.css" %}" rel="stylesheet">
   </head>
   <body>
-    {# Header section with shop logo/link #}
+    {# Header section with shop logo/homepage-link & language selector #}
     <div id="header">
+      {# Shop homepage link #}
       <a href="/shop" class="logo">{% translate "My shop" %}</a>
+
+      {# Get current language settings #}
       {% get_current_language as LANGUAGE_CODE %}
       {% get_available_languages as LANGUAGES %}
       {% get_language_info_list for LANGUAGES as languages %}
+
+      {# Language selector section #}
       <div class="languages">
         <p>{% translate "Language" %}:</p>
         <ul class="languages">
