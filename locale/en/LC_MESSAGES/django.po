@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-28 19:22+0100\n"
+"POT-Creation-Date: 2025-01-02 01:21+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,12 +26,52 @@ msgstr ""
 msgid "Coupon"
 msgstr ""
 
-#: educa/settings.py:137
+#: educa/settings.py:138
 msgid "English"
 msgstr ""
 
-#: educa/settings.py:138
+#: educa/settings.py:139
 msgid "Spanish"
+msgstr ""
+
+#: educa/urls.py:22
+msgid "accounts/login/"
+msgstr ""
+
+#: educa/urls.py:25
+msgid "accounts/logout/"
+msgstr ""
+
+#: educa/urls.py:29
+msgid "account/"
+msgstr ""
+
+#: educa/urls.py:32
+msgid "blog/"
+msgstr ""
+
+#: educa/urls.py:37
+msgid "cart/"
+msgstr ""
+
+#: educa/urls.py:38
+msgid "course/"
+msgstr ""
+
+#: educa/urls.py:39
+msgid "images/"
+msgstr ""
+
+#: educa/urls.py:40
+msgid "orders/"
+msgstr ""
+
+#: educa/urls.py:41
+msgid "payment/"
+msgstr ""
+
+#: educa/urls.py:42
+msgid "coupons/"
 msgstr ""
 
 #: orders/models.py:17
@@ -81,6 +121,22 @@ msgstr ""
 
 #: orders/templates/orders/order/create.html:44
 msgid "Place order"
+msgstr ""
+
+#: orders/urls.py:10
+msgid "create/"
+msgstr ""
+
+#: payment/urls.py:10
+msgid "process/"
+msgstr ""
+
+#: payment/urls.py:11
+msgid "completed/"
+msgstr ""
+
+#: payment/urls.py:12
+msgid "canceled/"
 msgstr ""
 
 #: shop/templates/shop/base.html:10 shop/templates/shop/base.html:17

@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'anymail',
     'django_extensions',
     'easy_thumbnails',
+    'rosetta',
     'social_django',
     'taggit',
 

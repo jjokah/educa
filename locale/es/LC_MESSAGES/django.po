@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-28 19:22+0100\n"
-"PO-Revision-Date: 2024-12-28 23:36+0100\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2025-01-02 01:21+0100\n"
+"PO-Revision-Date: 2025-01-02 14:20+0100\n"
+"Last-Translator:   <admin@example.com>\n"
 "Language-Team: \n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -18,6 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.5\n"
+"X-Translated-Using: django-rosetta 0.10.1\n"
 
 #: cart/forms.py:17
 msgid "Quantity"
@@ -27,13 +28,54 @@ msgstr "Cantidad"
 msgid "Coupon"
 msgstr "Cupón"
 
-#: educa/settings.py:137
+#: educa/settings.py:138
 msgid "English"
 msgstr "Inglés"
 
-#: educa/settings.py:138
+#: educa/settings.py:139
 msgid "Spanish"
 msgstr "Español"
+
+#: educa/urls.py:22
+msgid "accounts/login/"
+msgstr "cuentas/iniciar-sesión/"
+
+#: educa/urls.py:25
+msgid "accounts/logout/"
+msgstr "cuentas/cerrar-sesión/"
+
+#: educa/urls.py:29
+msgid "account/"
+msgstr "cuenta/"
+
+#: educa/urls.py:32
+msgid "blog/"
+msgstr "blog/"
+
+#: educa/urls.py:37
+msgid "cart/"
+msgstr "carro/"
+
+#: educa/urls.py:38
+msgid "course/"
+msgstr "curso/"
+
+#: educa/urls.py:39
+msgid "images/"
+msgstr "imágenes/"
+
+#: educa/urls.py:40
+msgid "orders/"
+msgstr "pedidos/"
+
+#: educa/urls.py:41
+msgid "payment/"
+msgstr "pago/"
+
+#: educa/urls.py:42
+#| msgid "Coupon"
+msgid "coupons/"
+msgstr "cupon/"
 
 #: orders/models.py:17
 msgid "first name"
@@ -87,6 +129,22 @@ msgstr "Total"
 msgid "Place order"
 msgstr "Realizar pedido"
 
+#: orders/urls.py:10
+msgid "create/"
+msgstr "crear/"
+
+#: payment/urls.py:10
+msgid "process/"
+msgstr "procesar/"
+
+#: payment/urls.py:11
+msgid "completed/"
+msgstr "comletado/"
+
+#: payment/urls.py:12
+msgid "canceled/"
+msgstr "cancelado/"
+
 #: shop/templates/shop/base.html:10 shop/templates/shop/base.html:17
 msgid "My shop"
 msgstr "Mi tienda"
@@ -107,11 +165,11 @@ msgid_plural ""
 "              "
 msgstr[0] ""
 "\n"
-"                %(items)s item, $%(total)s\n"
+"                %(items)s producto, $%(total)s\n"
 "              "
 msgstr[1] ""
 "\n"
-"                %(items)s items, $%(total)s\n"
+"                %(items)s productos, $%(total)s\n"
 "              "
 
 #: shop/templates/shop/base.html:35
