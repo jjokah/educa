@@ -15,7 +15,12 @@ def product_list(request, category_slug=None):
     products = Product.objects.filter(available=True)
     # If a category slug is provided, filter product by that category
     if category_slug:
-        category = get_object_or_404(Category, slug=category_slug)
+        language = request.LANGUAGE_CODE
+        category = get_object_or_404(
+            Category,
+            translations__language_code=language,
+            translations__slug=category_slug
+        )
         products = products.filter(category=category)
     return render(
         request,
@@ -34,8 +39,13 @@ def product_detail(request, id, slug):
     and form for adding product to cart.
     """
     # Get product or return 404 if not found/unavailable
+    language = request.LANGUAGE_CODE
     product = get_object_or_404(
-        Product, id=id, slug=slug, available=True
+        Product, 
+        id=id,
+        translations__language_code=language,
+        translations__slug=slug, 
+        available=True
     )
     # Initialize the cart add form
     cart_product_form = CartAddProductForm()

@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'anymail',
     'django_extensions',
     'easy_thumbnails',
+    'parler',
     'rosetta',
     'social_django',
     'taggit',
@@ -220,3 +221,15 @@ CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
 # Payment Variables
 PAYSTACK_SECRET_KEY=config('PAYSTACK_SECRET_KEY', default='')
 PAYSTACK_PAYMENT_URL=config('PAYSTACK_PAYMENT_URL', default='')
+
+# django-parler settings
+PARLER_LANGUAGES = {
+    None: (
+        {'code': 'en'},
+        {'code': 'es'},
+    ),
+    'default': {
+        'fallback': 'en',
+        'hide_untranslated': False,
+    }
+}
