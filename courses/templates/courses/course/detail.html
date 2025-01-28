@@ -1,0 +1,29 @@
+{% extends "courses/base.html" %}
+
+{# Template for displaying detailed view of a course #}
+
+{% block title %}
+  {{ object.title }}
+{% endblock title %}
+
+{% block content %}
+  {# Access course subject once and store in variable for efficiency #}
+  {% with subject=object.subject %}
+    <h1>
+      {{ object.title }}
+    </h1>
+    <div class="module">
+      <h2>Overview</h2>
+      {# Display course metadata including subject link, module count and instructor #}
+      <p>
+        <a href={% url "course_list_subject" subject.slug %}>
+          {{ subject.title }}
+        </a>.
+        {{ object.modules.count }} modules.
+        Instructor: {{ object.owner.get_full_name }}
+      </p>
+      {# Display course overview with line breaks preserved #}
+      {{ object.overview|linebreaks }}
+    </div>
+  {% endwith %}
+{% endblock content %}

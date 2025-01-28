@@ -1,0 +1,64 @@
+{% extends "courses/base.html" %}
+
+{# Template for displaying course listings, either filtered by subject or showing all courses #}
+
+{% block title %}
+  {% if subject %}
+    {{ subject.title }} courses
+  {% else %}
+    All courses
+  {% endif %}
+{% endblock title %}
+
+{% block content %}
+  {# Main heading shows current subject filter or "All courses" #}
+  <h1>
+    {% if subject %}
+      {{ subject.title }} courses
+    {% else %}
+      All courses
+    {% endif %}
+  </h1>
+
+  {# Left sidebar containing subject navigation #}
+  <div class="contents">
+    <h3>Subjects</h3>
+    <ul id="modules">
+      {# "All courses" link with selected state when no subject filter #}
+      <li {% if not subject %}class="selected"{% endif %}>
+        <a href="{% url "course_list" %}">All</a>
+      </li>
+      {# List of subject links with course counts #}
+      {% for s in subjects %}
+        <li {% if subject == s %}class="selected"{% endif %}>
+          <a href="{% url "course_list_subject" s.slug %}">
+            {{ s.title }}
+            <br>
+            <span>
+              {{ s.total_courses }} course{{ s.total_courses|pluralize }}
+            </span>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  {# Main content area displaying course list #}
+  <div class="module">
+    {% for course in courses %}
+      {% with subject=course.subject %}
+        {# Individual course entry with title, subject, module count and instructor #}
+        <h3>
+          <a href={% url "course_detail" course.slug %}>
+            {{ course.title }}
+          </a>
+        </h3>
+        <p>
+          <a href="{% url "course_list_subject" subject.slug %}">{{ subject }}</a>
+          {{ course.total_modules }} modules.
+          Instructor: {{ course.owner.get_full_name }}
+        </p>
+      {% endwith %}
+    {% endfor %}
+  </div>
+{% endblock content %}
