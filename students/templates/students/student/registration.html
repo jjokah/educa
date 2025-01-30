@@ -1,0 +1,20 @@
+{% extends "courses/base.html" %}
+
+{# Template for student registration/signup page #}
+
+{% block title %}
+  Sign up
+{% endblock title %}
+
+ {% block content %}
+  <h1>Sign up</h1>
+  <div class="module">
+    <p>Enter your details to create an account:</p>
+    <form method="post">
+      {{ form.as_p }}
+      {% csrf_token %}
+      <p><input type="submit" value="Create my account"></p>
+    </form>
+  </div>
+ {% endblock content %}
+ 

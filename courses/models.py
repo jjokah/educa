@@ -37,16 +37,26 @@ class Course(models.Model):
     Attributes:
         owner (User): The instructor who created the course
         subject (Subject): The subject category this course belongs to
+        students (User): The students enrolled in the course
         title (str): The name of the course
         slug (str): URL-friendly version of the title, unique across courses
         overview (str): Detailed description of the course
         created (datetime): Timestamp when the course was created
     """
     owner = models.ForeignKey(
-        User, related_name="courses_created", on_delete=models.CASCADE
+        User,
+        related_name="courses_created",
+        on_delete=models.CASCADE
     )
     subject = models.ForeignKey(
-        Subject, related_name="courses", on_delete=models.CASCADE
+        Subject, 
+        related_name="courses", 
+        on_delete=models.CASCADE
+    )
+    students = models.ManyToManyField(
+        User,
+        related_name='courses_joined',
+        blank=True
     )
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True)

@@ -11,6 +11,8 @@ from django.urls import reverse_lazy
 
 from braces.views import CsrfExemptMixin, JsonRequestResponseMixin
 
+from students.forms import CourseEnrollForm
+
 from .forms import ModuleFormSet
 from .models import Course, Content, Module, Subject
 
@@ -155,6 +157,16 @@ class CourseDetailView(DetailView):
     """
     model = Course
     template_name = 'courses/course/detail.html'
+
+    def get_context_data(self, **kwargs):
+        """
+        Extend context data to include course enrollment form
+        """
+        context = super().get_context_data(**kwargs)
+        context['enroll_form'] = CourseEnrollForm(
+            initial={'course':self.object}
+        )
+        return context
     
 
 class ContentCreateUpdateView(TemplateResponseMixin, View):

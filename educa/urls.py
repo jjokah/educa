@@ -39,6 +39,7 @@ urlpatterns = i18n_patterns(
     path(_('images/'), include('images.urls', namespace='images')),
     path(_('orders/'), include('orders.urls', namespace='orders')),
     path(_('payment/'), include('payment.urls', namespace='payment')),
+    path(_('students/'), include('students.urls')),
     path(_('coupons/'), include('coupons.urls', namespace='coupons')),
     path('rosetta/', include('rosetta.urls')),
     path('shop/', include('shop.urls', namespace='shop')),

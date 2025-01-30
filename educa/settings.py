@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'orders.apps.OrdersConfig',
     'payment.apps.PaymentConfig',
     'shop.apps.ShopConfig',
+    'students.apps.StudentsConfig',
 
     # Debug toolbar third-party app 
     # (placed at the buttom, to ensure it can properly intercept and display debug information.)
