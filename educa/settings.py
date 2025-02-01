@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'anymail',
     'django_extensions',
     'easy_thumbnails',
+    'embed_video',
     'localflavor',
     'parler',
     'rosetta',
@@ -169,7 +170,8 @@ else:
 
 
 # Login and authentication
-LOGIN_REDIRECT_URL = 'dashboard'
+LOGIN_REDIRECT_URL = reverse_lazy('student_course_list')
+# LOGIN_REDIRECT_URL = 'dashboard'
 LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
 

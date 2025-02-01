@@ -1,4 +1,8 @@
 {% extends "courses/base.html" %}
+
+{# Template for adding/editing course content #}
+
+{# Dynamic page title based on whether editing existing or adding new content #}
 {% block title %}
   {% if object %}
     Edit content "{{ object.title }}"
@@ -6,7 +10,10 @@
     Add new content
   {% endif %}
 {% endblock %}
+
+{# Main content block #}
 {% block content %}
+  {# Page heading matches the action being performed #}
   <h1>
     {% if object %}
       Edit content "{{ object.title }}"
@@ -14,6 +21,8 @@
       Add new content
     {% endif %}
   </h1>
+
+  {# Content form module #}
   <div class="module">
     <h2>Course info</h2>
     <form action="" method="post" enctype="multipart/form-data">
