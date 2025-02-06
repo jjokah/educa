@@ -17,42 +17,40 @@ sitemaps = {
     'tags': TagSitemap,
 }
 
-
-urlpatterns = i18n_patterns(
-    path(_('accounts/login/'), 
-         auth_views.LoginView.as_view(template_name='courses/registration/login.html'), 
-         name="login"),
-    path(_('accounts/logout/'), 
-         auth_views.LogoutView.as_view(template_name='courses/registration/logout.html', next_page='/'), 
-         name='logout'),
+urlpatterns = [
     path('admin/', admin.site.urls),
-    path(_('account/'), include('account.urls')),
-    path('social-auth/',
-         include('social_django.urls', namespace='social')),
-    path(_('blog/'), include('blog.urls', namespace='blog')),
+    path('rosetta/', include('rosetta.urls')),
+    path('api/', include('courses.api.urls', namespace='api')),
     path('sitemap.xml',
          sitemap,
          {'sitemaps': sitemaps},
          name='django.contrib.sitemaps.views.sitemap',),
+    path('accounts/login/', 
+         auth_views.LoginView.as_view(template_name='courses/registration/login.html'), 
+         name="login"),
+    path('accounts/logout/', 
+         auth_views.LogoutView.as_view(template_name='courses/registration/logout.html', next_page='/'), 
+         name='logout'),
+    path('account/', include('account.urls')),
+    path('social-auth/',
+         include('social_django.urls', namespace='social')),
+    path('blog/', include('blog.urls', namespace='blog')),
+    path('course/', include('courses.urls')),
+    path('images/', include('images.urls', namespace='images')),
+    path('students/', include('students.urls')),
+]
+
+urlpatterns += i18n_patterns(
     path(_('cart/'), include('cart.urls', namespace='cart')),
-    path(_('course/'), include('courses.urls')),
-    path(_('images/'), include('images.urls', namespace='images')),
     path(_('orders/'), include('orders.urls', namespace='orders')),
     path(_('payment/'), include('payment.urls', namespace='payment')),
-    path(_('students/'), include('students.urls')),
     path(_('coupons/'), include('coupons.urls', namespace='coupons')),
-    path('rosetta/', include('rosetta.urls')),
     path('shop/', include('shop.urls', namespace='shop')),
-    path('api/', include('courses.api.urls', namespace='api')),
-    path('__debug__/', include('debug_toolbar.urls')),
 )
 
 urlpatterns += [
-    path(
-        'payment/webhook/',
-        webhooks.paystack_webhook,
-        name='paystack-webhook'
-    ),
+    path('payment/webhook/', webhooks.paystack_webhook, name='paystack-webhook'),
+    path('__debug__/', include('debug_toolbar.urls')),
 ]
 
 if settings.DEBUG:
