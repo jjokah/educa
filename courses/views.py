@@ -1,6 +1,7 @@
 from django.apps import apps
 from django.db.models import Count
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.core.cache import cache
 from django.forms.models import modelform_factory
 from django.shortcuts import redirect, get_object_or_404
 from django.views.generic.base import TemplateResponseMixin, View
@@ -129,19 +130,43 @@ class CourseListView(TemplateResponseMixin, View):
     """
     model = Course
     template_name = 'courses/course/list.html'
+
     def get(self, request, subject=None):
         """
         Retrieves courses and subjects with their counts
         """
-        subjects = Subject.objects.annotate(
-            total_courses=Count('courses')
-        )
-        courses = Course.objects.annotate(
+        # Try to get subjects from cache
+        subjects = cache.get('all_subjects')
+        if not subjects:
+            # If not in cache, get from database with course counts
+            subjects = Subject.objects.annotate(
+                total_courses=Count('courses')
+            )
+            # Store in cache for future requests
+            cache.set('all_subjects', subjects)
+
+        # Get all courses with their module counts
+        all_courses = Course.objects.annotate(
             total_modules=Count('modules')
         )
+
         if subject:
+            # Filter by specific subject if provided
             subject = get_object_or_404(Subject, slug=subject)
-            courses = courses.filter(subject=subject)
+            key = f'subject_{subject.id}_courses'
+            courses = cache.get(key)
+            if not courses:
+                # If not in cache, filter and store
+                courses = all_courses.filter(subject=subject)
+                cache.set(key, courses)
+        else:
+            # Get all courses from cache or database
+            courses = cache.get('all_courses')
+            if not courses:
+                courses = all_courses
+                cache.set('all_courses', courses)
+
+        # Return template with context data
         return self.render_to_response(
             {
                 'subjects': subjects,

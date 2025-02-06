@@ -201,6 +201,7 @@ __
   - Celery
   - Redis
   - PostgreSQL
+  - Memcached
 
 - **Additional Tools**:
   - Pillow for image processing
@@ -211,7 +212,6 @@ __
   - Google OAuth2 for social authentication
   - Paystack for payment
   - Mailgun for mailing
-
 
 
 

@@ -1,4 +1,5 @@
 {% extends "courses/base.html" %}
+{% load cache %}
 
 {# Template for displaying detailed view of a course module for students #}
 
@@ -35,11 +36,13 @@
 
   {# Display module contents #}
   <div class="module">
-    {% for content in module.contents.all %}
-      {% with item=content.item %}
-        <h2>{{ item.title }}</h2>
-        {{ item.render }}
-      {% endwith %}
-    {% endfor %}
+    {% cache 600 module_contents module %}
+      {% for content in module.contents.all %}
+        {% with item=content.item %}
+          <h2>{{ item.title }}</h2>
+          {{ item.render }}
+        {% endwith %}
+      {% endfor %}
+    {% endcache %}
   </div>
 {% endblock content %}
