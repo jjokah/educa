@@ -43,6 +43,7 @@ urlpatterns = i18n_patterns(
     path(_('coupons/'), include('coupons.urls', namespace='coupons')),
     path('rosetta/', include('rosetta.urls')),
     path('shop/', include('shop.urls', namespace='shop')),
+    path('api/', include('courses.api.urls', namespace='api')),
     path('__debug__/', include('debug_toolbar.urls')),
 )
 
