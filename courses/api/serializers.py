@@ -15,7 +15,8 @@ class SubjectSerializer(serializers.ModelSerializer):
             total_students=Count('students')
         ).order_by('total_students')[:3]
         return [
-            f'{c.title} ({c.total_students} students)' for c in courses
+            f'{c.title} ({c.total_students} {"student" if c.total_students == 1 else "students"})'
+            for c in courses
         ]
 
     class Meta:
