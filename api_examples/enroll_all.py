@@ -1,8 +1,9 @@
 import requests
+from decouple import config
 
 
-username = 'admin'
-password = 'admin'
+username = config('TEST_USERNAME', default='')
+password = config('TEST_PASSWORD', default='')
 
 base_url = 'http://127.0.0.1:8000/api/'
 url = f'{base_url}courses/'
