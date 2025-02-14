@@ -2,6 +2,7 @@ from django.db.models import Count
 from django.shortcuts import get_object_or_404
 
 from rest_framework import generics, viewsets
+from rest_framework.authentication import BaseAuthentication
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -23,6 +24,7 @@ class SubjectViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 class CourseEnrollView(APIView):
+    authentication_classes = [BaseAuthentication]
     def post(self, request, pk, format=None):
         course = get_object_or_404(Course, pk=pk)
         course.students.add(request.user)
