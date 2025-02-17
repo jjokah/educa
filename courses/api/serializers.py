@@ -4,11 +4,18 @@ from courses.models import Content, Course, Module, Subject
 
 
 class ItemRelatedField(serializers.RelatedField):
+    """
+    Custom RelatedField that renders the related item using its render() method.
+    Used for polymorphic content items like text, video, image etc.
+    """
     def to_representation(self, value):
         return value.render()
     
 
 class ContentSerializer(serializers.ModelSerializer):
+    """
+    Serializer for Course Content that includes the order and polymorphic item field.
+    """
     item = ItemRelatedField(read_only=True)
     class Meta:
         model = Content
@@ -16,12 +23,19 @@ class ContentSerializer(serializers.ModelSerializer):
 
 
 class ModuleSerializer(serializers.ModelSerializer):
+    """
+    Basic serializer for Course Modules showing order, title and description.
+    """
     class Meta:
         model = Module
         fields = ['order', 'title', 'description']
 
 
 class ModuleWithContentsSerializer(serializers.ModelSerializer):
+    """
+    Extended Module serializer that includes all related content items.
+    Used when full module details with contents are needed.
+    """
     contents = ContentSerializer(many=True)
     class Meta:
         model = Module
@@ -29,6 +43,10 @@ class ModuleWithContentsSerializer(serializers.ModelSerializer):
 
 
 class CourseSerializer(serializers.ModelSerializer):
+    """
+    Basic Course serializer including core fields and related modules.
+    Modules are read-only to prevent nested writes.
+    """
     modules = ModuleSerializer(many=True, read_only=True)
 
     class Meta:
@@ -46,6 +64,10 @@ class CourseSerializer(serializers.ModelSerializer):
 
 
 class CourseWithContentSerializer(serializers.ModelSerializer):
+    """
+    Detailed Course serializer that includes full module contents.
+    Used when complete course data including all modules and their contents is needed.
+    """
     modules = ModuleWithContentsSerializer(many=True)
     class Meta:
         model = Course
@@ -69,6 +91,10 @@ class SubjectSerializer(serializers.ModelSerializer):
     popular_courses = serializers.SerializerMethodField()
 
     def get_popular_courses(self, obj):
+        """
+        Returns the top 3 courses with the most students,
+        formatted as 'course_title (number_of_students)'
+        """
         courses = obj.courses.annotate(
             total_students=Count('students')
         ).order_by('total_students')[:3]
