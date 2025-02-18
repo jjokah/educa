@@ -46,6 +46,7 @@ urlpatterns = [
     
     # Application routes
     path('blog/', include('blog.urls', namespace='blog')),
+    path('chat/', include('chat.urls', namespace='chat')),
     path('course/', include('courses.urls')),
     path('images/', include('images.urls', namespace='images')),
     path('students/', include('students.urls')),
