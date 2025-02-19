@@ -25,6 +25,9 @@ SITE_ID = 1
 
 INSTALLED_APPS = [
     
+    # Daphne ASGI server - third-party app
+    'daphne', 
+    
     # Custom auth app (placed at the top, to override admin's auth templates)
     'account.apps.AccountConfig',
 
@@ -265,3 +268,5 @@ REST_FAMEWORK = {
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
 }
+
+ASGI_APPLICATION = 'educa.asgi.application'
