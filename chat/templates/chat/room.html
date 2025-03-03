@@ -1,6 +1,6 @@
 {% extends "courses/base.html" %}
 
-{# Template for the chat room view #}
+{# Template for the real-time chat room interface #}
 
 {% block title %}Chat room for "{{ course.title }}"{% endblock title %}
 
@@ -18,27 +18,44 @@
 {% block include_js %}
   {# Embed course ID for JavaScript access #}
   {{ course.id|json_script:"course-id" }}
+  {{ request.user.username|json_script:"request-user" }}
 {% endblock include_js %}
 
 {% block domready %}
-  // Initialize WebSocket connection when DOM is ready
+  // Extract course ID and username from embedded JSON
   const courseId = JSON.parse(
     document.getElementById('course-id').textContent
   );
-  // Construct WebSocket URL for chat room
+  const requestUser = JSON.parse(
+    document.getElementById('request-user').textContent
+  );
+
+  // Build WebSocket URL using course ID for room-specific chat
   const url = 'ws://' + window.location.host +
               '/ws/chat/room/' + courseId + '/';
   const chatSocket = new WebSocket(url);
 
-  // Handle incoming messages
+  // WebSocket message handler - processes incoming chat messages
   chatSocket.onmessage = function(event) {
     const data = JSON.parse(event.data);
     const chat = document.getElementById('chat');
 
-    // Append new message to chat container
-    chat.innerHTML += '<div class="message">' +
+    // Format timestamp for message display
+    const dateOptions = {hour: 'numeric', minute: 'numeric', hour12: true};
+    const datetime = new Date(data.datetime).toLocaleString('en', dateOptions);
+
+    // Determine message source (current user or others)
+    const isMe = data.user === requestUser;
+    const source = isMe ? 'me' : 'other';
+    const name = isMe ? 'Me' : data.user;
+
+    // Create and append new message HTML with styling based on source
+    chat.innerHTML += '<div class="message ' + source + '">' +
+                      '<strong>' + name + '</strong> ' +
+                      '<span class="date">' + datetime + '</span><br>' +
                       data.message + '</div>';
-    // Auto-scroll to latest message
+
+    // Ensure latest message is visible by scrolling to bottom
     chat.scrollTop = chat.scrollHeight;
   };
 
@@ -51,7 +68,7 @@
   const input = document.getElementById('chat-message-input');
   const submitButton = document.getElementById('chat-message-submit');
 
-  // Handle send button click
+  // Handle send button click - transmits message via WebSocket
   submitButton.addEventListener('click', function(event) {
     const message = input.value;
     if(message) {
@@ -63,7 +80,7 @@
     }
   });
 
-  // Handle Enter key press in input field
+  // Handle Enter key press in input field - for message submission
   input.addEventListener('keypress', function(event) {
     if (event.key === 'Enter') {
       // cancel the default action, if needed
@@ -73,6 +90,6 @@
     }
   });
 
-  // Set initial focus on input field
+  // Set initial focus on input field when chat loads
   input.focus()
 {% endblock domready %}
