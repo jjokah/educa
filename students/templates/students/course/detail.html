@@ -32,6 +32,11 @@
         <li>No modules yet.</li>
       {% endfor %}
     </ul>
+    <h3>
+      <a href="{% url "chat:course_chat_room" object.id %}">
+        Course chat room
+      </a>
+    </h3>
   </div>
 
   {# Display module contents #}
