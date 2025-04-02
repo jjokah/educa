@@ -124,6 +124,9 @@ python manage.py runserver
 
 ## 🏗️ System Architecture
 
+### Project Structure
+![educa project diagram](./demo/educa-project-diagram.jpeg)
+
 ### Applications Structure
 ```
 educa/
