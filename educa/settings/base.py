@@ -7,14 +7,12 @@ from decouple import config
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 SECRET_KEY = config(
     'DJANGO_SECRET_KEY', 
     default='django-insecure-pt8tc*1bc&f1mlb^5qgkb8pp1()zf$s0aazhgw^_br&_el(r%x'
 )
-
-DEBUG = True
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1').split(',')
 CSRF_TRUSTED_ORIGINS = config('CSRF_TRUSTED_ORIGINS', default='').split(',')
@@ -110,16 +108,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'educa.wsgi.application'
 
-DATABASES = {
-    'default': {
-        'ENGINE': config('DATABASE_ENGINE', default='django.db.backends.sqlite3'),
-        'NAME': config('DATABASE_NAME', default=BASE_DIR / 'db.sqlite3'),
-        'USER': config('DATABASE_USER', default=''),
-        'PASSWORD': config('DATABASE_PASSWORD', default=''),
-        'HOST': config('DATABASE_HOST', default=''),
-        'PORT': config('DATABASE_PORT', default=''),
-    }
-}
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -166,17 +154,6 @@ MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 
-# Email server configuration
-if DEBUG:
-    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-else:
-    EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
-    DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
-    SERVER_EMAIL = config('SERVER_EMAIL')
-    MAILGUN_API_KEY = config('MAILGUN_API_KEY')  
-    MAILGUN_SENDER_DOMAIN = config('MAILGUN_SENDER_DOMAIN')
-
-
 # Login and authentication
 LOGIN_REDIRECT_URL = reverse_lazy('student_course_list')
 # LOGIN_REDIRECT_URL = 'dashboard'
@@ -206,11 +183,6 @@ SOCIAL_AUTH_PIPELINE = [
     'social_core.pipleine.social_auth.load_extra_data',
     'social_core.pipeline.user_details',
 ]
-
-if DEBUG:
-    import mimetypes
-    mimetypes.add_type('application/javascript', '.js', True)
-    mimetypes.add_type('text/css', '.css', True)
 
 ABSOLUTE_URL_OVERRIDES = {
     # Generate the user_detail URL for a given user using get_absolute_url()
