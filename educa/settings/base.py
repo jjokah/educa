@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     # Third-party apps
     'anymail',
     'django_extensions',
+    'django_simple_deploy',
     'easy_thumbnails',
     'embed_video',
     'localflavor',
