@@ -11,8 +11,7 @@ django-extensions==3.2.3
 django-localflavor==4.0
 django-parler==2.3
 django-redisboard==8.4.0
-django-rosetta==0.10.2
-django-simple-deploy[fly_io]==1.0.0
+django-rosetta==0.10.1
 django-taggit==5.0.1
 easy-thumbnails==2.10
 flower==2.0.1
