@@ -6,7 +6,7 @@ ENV PYTHONDONOTWRITEBYCODE=1
 ENV PYTHONBUFFERED=1
 
 # Set work directory
-WORKDIR /app
+WORKDIR /code
 
 # Install dependencies
 RUN pip install --upgrade pip
