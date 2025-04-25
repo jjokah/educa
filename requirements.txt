@@ -24,5 +24,6 @@ python-decouple==3.8
 redis==5.1.1
 requests==2.31.0
 social-auth-app-django==5.4.0
+uwsgi==2.0.25.1
 WeasyPrint==63.0
 werkzeug==3.0.2
