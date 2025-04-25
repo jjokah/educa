@@ -10,6 +10,12 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
 
+  cache:
+    image: redis:7.4
+    restart: always
+    volumes:
+      - ./data/cache:/data
+
   web:
     build: .
     command: ["./wait-for-it.sh", "db:5432", "--",
@@ -27,3 +33,4 @@ services:
       - POSTGRES_PASSWORD=postgres
     depends_on:
       - db
+      - cache
