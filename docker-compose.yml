@@ -19,13 +19,10 @@ services:
   web:
     build: .
     command: ["./wait-for-it.sh", "db:5432", "--",
-              "python", "/code/manage.py", "runserver",
-              "0.0.0.0:8000"]
+              "uwsgi", "--ini", "/code/config/uwsgi/uwsgi.ini"]
     restart: always
     volumes:
       - .:/code
-    ports:
-      - "8000:8000"
     environment:
       - DJANGO_SETTINGS_MODULE=educa.settings.prod
       - POSTGRES_DB=postgres
