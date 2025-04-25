@@ -11,11 +11,12 @@ django-extensions==3.2.3
 django-localflavor==4.0
 django-parler==2.3
 django-redisboard==8.4.0
+django-rosetta==0.10.1
 django-taggit==5.0.1
 easy-thumbnails==2.10
 flower==2.0.1
 markdown==3.6
-Pillow==10.3.0
+pillow==10.3.0
 psycopg[binary]==3.1.18
 pymemcache==4.0.0
 pyOpenSSL==24.1.0
