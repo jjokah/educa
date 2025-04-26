@@ -23,6 +23,7 @@ services:
     restart: always
     volumes:
       - .:/code
+      - ./tmp:/code/tmp
     environment:
       - DJANGO_SETTINGS_MODULE=educa.settings.prod
       - POSTGRES_DB=postgres
@@ -31,3 +32,13 @@ services:
     depends_on:
       - db
       - cache
+
+  nginx:
+    image: nginx:1.25.5
+    restart: always
+    volumes:
+      - ./config/nginx:/etc/nginx/templates
+      - .:/code
+      - ./tmp:/code/tmp
+    ports:
+      - "80:80"
