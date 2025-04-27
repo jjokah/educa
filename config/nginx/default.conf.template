@@ -13,4 +13,12 @@ server {
         include     /etc/nginx/uwsgi_params;
         uwsgi_pass  uwsgi_app;
     }
+
+    location /static/ {
+        alias /code/staticfiles/;
+    }
+
+    location /media/ {
+        alias /code/media/;
+    }
 }
