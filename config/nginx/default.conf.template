@@ -4,10 +4,18 @@ upstream uwsgi_app {
 }
 
 server {
-    listen          80;
-    server_name     www.educa.magnisale.com educa.magnisale.com;
-    error_log       stderr warn;
-    access_log      /dev/stdout main;
+    listen                  80;
+    server_name             www.educa.magnisale.com educa.magnisale.com;
+    return 301              https://$host$request_uri;
+}
+
+server {
+    listen                  443 ssl;
+    ssl_certificate         /code/ssl/educa.crt;
+    ssl_certificate_key     /code/ssl/educa.key;
+    server_name             www.educa.magnisale.com educa.magnisale.com;
+    error_log               stderr warn;
+    access_log              /dev/stdout main;
 
     location / {
         include     /etc/nginx/uwsgi_params;

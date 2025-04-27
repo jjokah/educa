@@ -42,3 +42,4 @@ services:
       - ./tmp:/code/tmp
     ports:
       - "80:80"
+      - "443:443"
