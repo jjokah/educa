@@ -41,7 +41,7 @@
   );
 
   // Build WebSocket URL using course ID for room-specific chat
-  const url = 'ws://' + window.location.host +
+  const url = 'wss://' + window.location.host +
               '/ws/chat/room/' + courseId + '/';
   const chatSocket = new WebSocket(url);
 
