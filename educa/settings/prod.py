@@ -1,5 +1,8 @@
 from .base import *
 
+import dj_database_url
+import os
+
 
 DEBUG = False
 
@@ -10,15 +13,9 @@ ADMINS = [
 ALLOWED_HOSTS = ['*']
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('POSTGRES_DB'),
-        'USER': config('POSTGRES_USER'),
-        'PASSWORD': config('POSTGRES_PASSWORD'),
-        'HOST': config('POSTGRES_HOST'),
-        'PORT': config('POSTGRES_PORT'),
-    }
+    'default': dj_database_url.config(default=os.environ.get("DATABASE_URL"))
 }
+
 
 # Email server configuration
 EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
